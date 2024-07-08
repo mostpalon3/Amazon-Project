@@ -1,10 +1,31 @@
 import { renderCheckouHeader } from "../script/checkout/checkoutHeader.js";
-
 export let cart;
-loadFromStorage();
+const url = new URL(window.location.href);
+export let para = url.searchParams.get('para');
+//the page will render according to url
+renderCart(para);
+export function renderCart(para) {
+    if (para) {
+        loadFromStorage('cart1');
+    } else {
+        loadFromStorage('cart');
+    }
 
-export function loadFromStorage(){
-    cart = JSON.parse(localStorage.getItem('cart')) || [];
+    function loadFromStorage(cartKey) {
+        cart = JSON.parse(localStorage.getItem(cartKey)) || [];
+    }
+}
+export function buyNow(productId) {
+    let cart = [];
+    let selectorValue = document.querySelector(`.js-quantity-selector-${productId}`);
+    let quantity = Number(selectorValue.value);
+    cart.push({
+        productId,
+        quantity,
+        deliveryOptionId: '1'//default
+    });
+    //saved in cart1 localstorage
+    localStorage.setItem('cart1', JSON.stringify(cart))
 }
 
 export function saveToStorage() {
@@ -21,9 +42,9 @@ export function addToCart(productId) {
 
     let selectorValue = document.querySelector(`.js-quantity-selector-${productId}`);
     let quantity;
-    if (selectorValue){
+    if (selectorValue) {
         quantity = Number(selectorValue.value);
-    }else{
+    } else {
         quantity = 1;
     }
 
@@ -109,13 +130,13 @@ export function updateDeliveryOption(productId, deliveryoptionid) {
     saveToStorage();
 }
 
- export function loadCart (fun){
-  const xhr = new XMLHttpRequest();
-  xhr.addEventListener('load',() => {
-    console.log(xhr.response);
-    fun();
-  })
+export function loadCart(fun) {
+    const xhr = new XMLHttpRequest();
+    xhr.addEventListener('load', () => {
+        console.log(xhr.response);
+        fun();
+    })
 
-  xhr.open('GET', 'https://supersimplebackend.dev/cart');//here we are just practicing so it will just give text 
-  xhr.send();
- }
+    xhr.open('GET', 'https://supersimplebackend.dev/cart');//here we are just practicing so it will just give text 
+    xhr.send();
+}

@@ -4,8 +4,8 @@ import { renderCheckouHeader } from "./checkout/checkoutHeader.js";
 import "../data/cart-oop.js"; //this is another syntax we can use for imports , this just runs all the file as we are not importing anything specific
 // import "../data/cart-class.js";
 // import '../data/backend-practice.js';
-import { loadProducts, loadProductsFetch } from "../data/products.js";
-import { loadCart } from "../data/cart.js";
+import { loadProductsFetch } from "../data/products.js";
+import { loadCart} from "../data/cart.js";
 
 async function loadPage() {
   //error handling in async await

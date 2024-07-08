@@ -1,5 +1,5 @@
 //namedexport
-import { cart, removeFromCart, updateQuantity, updateDeliveryOption } from "../../data/cart.js";//.. represents outside the folder
+import { cart, removeFromCart, updateQuantity, updateDeliveryOption, para } from "../../data/cart.js";//.. represents outside the folder
 import { products,getProduct } from "../../data/products.js";
 import { formatCurrency } from "../Utils/money.js";
 // import { hello } from "https://unpkg.com/supersimpledev@1.0.1/hello.esm.js";
@@ -94,7 +94,7 @@ export function renderOrderSummary() {
     .forEach((link) => {
       link.addEventListener('click', () => {
         const productId = link.dataset.productId;
-        removeFromCart(productId);
+        removeFromCart(productId,para);
         // const container = document.querySelector(`.js-cart-item-container-${productId}`);
         // container.remove();
         renderOrderSummary();//after deleting from the cart , instead of updating the the html using DOM we use this recursion to regenerate the html again 
@@ -136,7 +136,7 @@ export function renderOrderSummary() {
       link.addEventListener('click', () => {
         const productId = link.dataset.productId;
         const newQuantity = Number(document.querySelector(`.quantity-input-${productId}`).value);
-        updateQuantity(productId, newQuantity);
+        updateQuantity(productId, newQuantity,para);
         renderPaymentSummary();//to update the payment section
         //calculateCartQuantity('.js-payment-item');
         //iski jarurat nai since upar wle function me ye already run horha
@@ -149,7 +149,7 @@ export function renderOrderSummary() {
         const productId = link.dataset.productId;
         const newQuantity = Number(document.querySelector(`.quantity-input-${productId}`).value);
         if (event.key === 'Enter')
-          updateQuantity(productId, newQuantity);
+          updateQuantity(productId, newQuantity,para);
         renderPaymentSummary();
       })
     });
@@ -204,7 +204,7 @@ export function renderOrderSummary() {
     .forEach((element) => {
       element.addEventListener('click', () => {
         const { productId, deliveryOptionId } = element.dataset;
-        updateDeliveryOption(productId, deliveryOptionId);
+        updateDeliveryOption(productId, deliveryOptionId,para);
         renderOrderSummary();
         renderPaymentSummary();
         //calling a function inside itself is called recursion

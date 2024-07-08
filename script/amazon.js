@@ -1,4 +1,4 @@
-import {addToCart, calculateCartQuantity } from "../data/cart.js";
+import {addToCart, buyNow, calculateCartQuantity,  renderCart } from "../data/cart.js";
 //another syntax for this
 //import * cartModule from '../data/cart.js';
 //cartModule.cart
@@ -106,4 +106,16 @@ document.querySelectorAll(".js-add-to-cart").forEach((button) => {
     addedPreview(productId);
   });
 });
+document.querySelectorAll('.js-buy-now')
+.forEach((link) => {
+  link.addEventListener('click',() => {
+    const productId = link.dataset.productId;
+    buyNow(productId);
+    window.location.href = 'checkout.html?para=true';
+  }
+)
+})
+
+
 }
+

@@ -1,4 +1,4 @@
-import { cart } from "../../data/cart.js";
+import { cart, para } from "../../data/cart.js";
 import { getProduct } from "../../data/products.js";
 import { getDeliveryOption } from "../../data/deliveryOptions.js";
 import formatCurrency from "../Utils/money.js";//since its default import
@@ -103,7 +103,11 @@ let deliveryFee = 0;
     //href gives the url of the browser
     window.location.href = 'orders.html';//it will replace the url after / , it is file path
     //the current file is checkout.html and it will look for the file orders.html
+    if (para){
+      localStorage.removeItem('cart1');
+    }else{
     localStorage.removeItem('cart');
+    }
 
     });
 }
