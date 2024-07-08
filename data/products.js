@@ -135,7 +135,7 @@ export let products = [];
 
 export function loadProductsFetch(){
   //response is fed into then function
-  const promise = fetch('https://supersimplebackend.dev/products').then((response) => {
+  const promise = fetch('backend/products.json').then((response) => {
     console.log(response);
     //this gives the json or data that is attached to the response
     return response.json();//response.json() is asynchronouse, it returns a promise, so we need to wait for this promise to finish to go to next step 
@@ -190,7 +190,7 @@ loadProductsFetch() //this gives promise
     console.log('Unexpected error. Please try again later.')
   })
 
-  xhr.open('GET', 'https://supersimplebackend.dev/products');
+  xhr.open('GET', 'backend/products.json');
   // xhr.open('GET', 'https://error.supersimplebackend.dev/products');//just for practice
 //Http requests are asynchronous
   xhr.send();
