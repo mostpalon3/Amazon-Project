@@ -77,6 +77,11 @@ products.forEach((product) => {
           <!-- here this creates a data attribute for the button -->
             Add to Cart
           </button>
+          <button class="add-to-cart-button button-secondary js-buy-now "
+          data-product-id = "${product.id}">
+          <!-- here this creates a data attribute for the button -->
+            Buy Now
+          </button>
         </div>
     `;
 });

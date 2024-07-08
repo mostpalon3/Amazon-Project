@@ -103,6 +103,8 @@ let deliveryFee = 0;
     //href gives the url of the browser
     window.location.href = 'orders.html';//it will replace the url after / , it is file path
     //the current file is checkout.html and it will look for the file orders.html
+    localStorage.removeItem('cart');
+
     });
 }
 

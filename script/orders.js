@@ -1,43 +1,41 @@
 import { orders } from "../data/orders.js"
 import formatCurrency from "../script/Utils/money.js"
 import { getProduct, products, loadProductsFetch } from "../data/products.js";
-import { calculateCartQuantity } from "../data/cart.js";
-
-let clickedId;
-let clickedOrderId;
+import { addToCart, calculateCartQuantity } from "../data/cart.js";
 
 async function loadPage() {
-    await loadProductsFetch();
-    renderOrderPage();
-    calculateCartQuantity('.js-order-cart');
-    loadTrackingURL();
+  await loadProductsFetch();
+  renderOrderPage();
+  calculateCartQuantity('.js-order-cart');
+  butAgain();
+  loadTrackingURL();
 }
 loadPage();
 
 
 function renderOrderPage() {
-    let orderFinalSummaryHTML = '';
-    orders.forEach((order) => {
-        const orderId = order.id;
-        const totalCostCents = order.totalCostCents;
-        // const orderTime = order.orderTime;
-        const orderDate = new Date(order.orderTime);
-        const orderDateString = `${orderDate.toLocaleString('default', { month: 'short' })} ${orderDate.getDate()}`;
-        let orderProductSummaryHTML = '';
-        console.log(order);
-        order.products.forEach(async (product) => {
-            const productId = product.productId;
-            const quantity = product.quantity;
-            const estimatedDate = new Date(product.estimatedDeliveryTime);
-            const estimatedDateString = `${estimatedDate.toLocaleString('default', { month: 'short' })} ${estimatedDate.getDate()}`;
-            let matchingProduct;
-            products.forEach((product) => {
-                if (product.id === productId) {
-                    matchingProduct = product;
-                }
-            });
+  let orderFinalSummaryHTML = '';
+  orders.forEach((order) => {
+    const orderId = order.id;
+    const totalCostCents = order.totalCostCents;
+    // const orderTime = order.orderTime;
+    const orderDate = new Date(order.orderTime);
+    const orderDateString = `${orderDate.toLocaleString('default', { month: 'short' })} ${orderDate.getDate()}`;
+    let orderProductSummaryHTML = '';
+    console.log(order);
+    order.products.forEach(async (product) => {
+      const productId = product.productId;
+      const quantity = product.quantity;
+      const estimatedDate = new Date(product.estimatedDeliveryTime);
+      const estimatedDateString = `${estimatedDate.toLocaleString('default', { month: 'short' })} ${estimatedDate.getDate()}`;
+      let matchingProduct;
+      products.forEach((product) => {
+        if (product.id === productId) {
+          matchingProduct = product;
+        }
+      });
 
-            orderProductSummaryHTML += `
+      orderProductSummaryHTML += `
             <div class="product-image-container">
               <img src=${matchingProduct.image}>
             </div>
@@ -54,7 +52,7 @@ function renderOrderPage() {
               </div>
               <button class="buy-again-button button-primary">
                 <img class="buy-again-icon" src="images/icons/buy-again.png">
-                <span class="buy-again-message">Buy it again</span>
+                <span class="buy-again-message js-buy-again" data-product-id = "${matchingProduct.id}">Buy it again</span>
               </button>
             </div>
 
@@ -65,10 +63,10 @@ function renderOrderPage() {
                 </button>
             </div>
     `;
-        });
+    });
 
 
-        orderFinalSummaryHTML += `
+    orderFinalSummaryHTML += `
             <div class="order-container">
 
           <div class="order-header">
@@ -93,20 +91,32 @@ function renderOrderPage() {
           </div>
         </div>
     `;
-    });
-    document.querySelector('.js-orders-grid')
-        .innerHTML = orderFinalSummaryHTML;
+  });
+  document.querySelector('.js-orders-grid')
+    .innerHTML = orderFinalSummaryHTML;
 }
 
 function loadTrackingURL() {
-    document.querySelectorAll('.js-button-secondary')
-        .forEach((link) => {
-            link.addEventListener('click', () => {
-                clickedId = link.dataset.clickedId;
-                clickedOrderId = link.dataset.clickedOrderId;
-                console.log(clickedId);
-                console.log(clickedOrderId);
-                window.location.href = `tracking.html?orderId=${clickedOrderId}&productId=${clickedId}`
-            })
-        })
+  document.querySelectorAll('.js-button-secondary')
+    .forEach((link) => {
+      link.addEventListener('click', () => {
+        const clickedId = link.dataset.clickedId;
+        const clickedOrderId = link.dataset.clickedOrderId;
+        console.log(clickedId);
+        console.log(clickedOrderId);
+        window.location.href = `tracking.html?orderId=${clickedOrderId}&productId=${clickedId}`
+      })
+    })
+}
+function butAgain() {
+  document.querySelectorAll('.js-buy-again')
+    .forEach((link) => {
+      link.addEventListener('click', () => {
+        const productId = link.dataset.productId;
+        console.log(productId);
+        addToCart(productId);
+        calculateCartQuantity('.js-order-cart');
+        window.location.href = 'checkout.html';
+      })
+    })
 }

@@ -16,6 +16,11 @@
 .back-to-orders-link {
   display: inline-block;
   margin-bottom: 30px;
+  width: fit-content;
+  padding: 9px;
+  border-radius: 50px;
+  text-decoration: none;
+  box-sizing: border-box;
 }
 
 .delivery-date {
@@ -72,6 +77,3 @@
   border-radius: 50px;
   overflow: hidden;
 }
-
-
-

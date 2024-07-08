@@ -90,7 +90,7 @@ function renderTrackingPage() {
 
   let trackingSummaryHTML = `      
         <div class="order-tracking">
-        <a class="back-to-orders-link link-primary" href="orders.html">
+        <a class="back-to-orders-link button-primary" href="orders.html">
           View all orders
         </a>
 
