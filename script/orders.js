@@ -1,6 +1,7 @@
 import { orders } from "../data/orders.js"
 import formatCurrency from "../script/Utils/money.js"
 import { getProduct, products, loadProductsFetch } from "../data/products.js";
+import { calculateCartQuantity } from "../data/cart.js";
 
 let clickedId;
 let clickedOrderId;
@@ -8,6 +9,7 @@ let clickedOrderId;
 async function loadPage() {
     await loadProductsFetch();
     renderOrderPage();
+    calculateCartQuantity('.js-order-cart');
     loadTrackingURL();
 }
 loadPage();

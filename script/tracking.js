@@ -1,13 +1,11 @@
 import { getProduct, loadProductsFetch } from "../data/products.js";
 import { orders } from "../data/orders.js";
-import  "../data/cart-class.js"
+import { calculateCartQuantity } from "../data/cart.js";
 
-
-
-// Cart.calculateCartQuantity('js-cart-quantity');
 async function loadPage() {
   await loadProductsFetch();
   renderTrackingPage();
+  calculateCartQuantity('.js-track-cart');
 }
 loadPage();
 
@@ -53,6 +51,7 @@ function renderTrackingPage() {
     progressPercentage = 10;
   }
 
+
   const css = `
     .progress-bar {
         width:0px;
@@ -70,6 +69,7 @@ function renderTrackingPage() {
         }
     }
 `;
+
 
   // Create a <link> element for tracking.css
   const linkTag = document.createElement('link');
@@ -109,13 +109,13 @@ function renderTrackingPage() {
         <img class="product-image" src=${matchingProduct.image}>
 
         <div class="progress-labels-container">
-          <div class="progress-label">
+          <div class="progress-label js-preparing">
             Preparing
           </div>
-          <div class="progress-label current-status">
+          <div class="progress-label js-shipped">
             Shipped
           </div>
-          <div class="progress-label">
+          <div class="progress-label js-delivered">
             Delivered
           </div>
         </div>
@@ -126,4 +126,14 @@ function renderTrackingPage() {
       </div>`;
   document.querySelector('.js-main')
     .innerHTML = trackingSummaryHTML;
+
+    if (progressPercentage < 50){
+      document.querySelector('.js-preparing').classList.add('current-status')
+    }
+    else if (progressPercentage < 100){
+      document.querySelector('.js-shipped').classList.add('current-status')
+    }
+    else if (progressPercentage === 100){
+      document.querySelector('.js-delivered').classList.add('current-status')
+    }
 }
