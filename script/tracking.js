@@ -1,7 +1,10 @@
 import { getProduct, loadProductsFetch } from "../data/products.js";
 import { orders } from "../data/orders.js";
+import  "../data/cart-class.js"
 
-console.log(orders);
+
+
+// Cart.calculateCartQuantity('js-cart-quantity');
 async function loadPage() {
   await loadProductsFetch();
   renderTrackingPage();
