@@ -1,0 +1,35 @@
+Backend = another computer that manages the data of a website 
+//How does our computer send information to the backend ?
+HTTP = HyperText Transfer Protocol
+HTTP message is sent through internet from frontend interaction to backend
+
+A callback is a function passed as an argument to another function.
+
+Promises - better way to handle asynchronous code  
+//resolve is similar to done() function//let us wait for some code to finish befoer going to the next step 
+
+fetch() = a better way to make request 
+feth uses a promise
+
+async await = even better way to handle asynchronous code 
+//problem with promises is that it creates xtra code 
+//the reason we use async , because it lets us use await
+//await = let us wait for a promise to finish before going to next line
+//async await shortcut for promises, so it recommended
+
+//Error Handling 
+when we are sending HTTP requests, we could get unexpected errors
+
+//try catch can be used with synchronous code or normal code, it is not necessary to be a async await
+//try skip the code and go to catch
+
+//why dont we use try catch everywhere ?
+its meant to handle unexpected errors (code is correct , error is outside our control)
+
+//throw - manual error
+
+4types of requests
+GET - get something from backend
+POST - create something
+PUT = update something
+DELETE = delete something

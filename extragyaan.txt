@@ -1,0 +1,8 @@
+# To empty the local storage
+//localStorage.removeItem('cart')
+//did this since we were adding the deliveryOptiionId
+
+#sometimes if you face any errors there can be reason that any bad data is saved inside the localStorage,so we can use the following:
+//localStorage.clear()
+//after that referesh the page
+//localStorage.getItem()//to get the item in localStorage

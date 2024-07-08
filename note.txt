@@ -1,0 +1,59 @@
+Disadvantage of Manual Testing
+1.Hard to test every situation and takes to much time
+2.Hard to re-test
+
+So we ,use Automated test
+using code to test the code 
+
+//let say we change the code , in manual testing we would have to open the website and setup everything manually , but in automated code we just need to re-run these test code 
+//situation = test case
+//1.Basic test cases = if code is working or not
+//2.Edge cases = test with the values which are tricky
+
+//group of related tests = test suite 
+1.Create test suite 
+2.create tests 
+3.Compare values and display result 
+
+
+//Testing Framework = external library that helps us write tests easier 
+
+In this project we are using testing framework JASMINE
+MOst testing frameworks are similar 
+Othere testing frameworks:
+jest(for ReactJS)
+MochaJS
+
+spec= test
+
+Test Coverage = how much of the code is being tested (try to maximize the test coverage)
+flaky test = test that sometimes passes and sometimes fails 
+
+// unit test = test 1 code 
+//integration test = tests many units /pieces of coded together
+1.How the page looks 
+2.How the page behaves 
+
+
+//shortcut in jasmine 
+//Hooks =lets us run some code for each test
+
+//Hooks in jasmine :
+//beforeEach() - runs code before each test
+//afterEach() - runs code after each test
+//beforeAll() - runs code before all test
+//afterAll() - runs code after all test
+
+process
+1.Mkae changes to code2.Re-run the tests 
+3.Save to Git
+
+
+URL parameters
+we need to make each tracking page different , so we will use  url parameters
+after the URL type:
+(left side)?orderId=123&productId=456 //property value pair, right side- value
+this is sort of like object {
+    objectId:123
+}
+eg.trackinghtml

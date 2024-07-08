@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Checkout</title>
+
+  <!-- This code is needed for responsive design to work.
+      (Responsive design = make the website look good on
+      smaller screen sizes like a phone or a tablet). -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Load a font called Roboto from Google Fonts. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- Here are the CSS files for this page. -->
+  <link rel="stylesheet" href="styles/shared/general.css">
+  <link rel="stylesheet" href="styles/pages/checkout/checkout-header.css">
+  <link rel="stylesheet" href="styles/pages/checkout/checkout.css">
+</head>
+
+<body>
+  <div class="checkout-header js-checkout-header">
+
+  </div>
+
+    <div class="main">
+      <div class="page-title">Review your order</div>
+
+      <div class="checkout-grid">
+        <div class="order-summary js-order-summary">
+        </div>
+
+        <div class="payment-summary js-payment-summary">
+          
+        </div>
+      </div>
+    </div>
+
+    <!-- External library - code that is outside of our project -->
+    <!-- here we are loading the library from external link -->
+    <!-- now we will run the function inside this library which is hello , in the checkout.js -->
+
+    <!-- <script src="https://unpkg.com/supersimpledev@1.0.1/hello.js"></script> -->
+    <!-- the below is dayJs external library,which is minified by minification to get current date and time-->
+    <!-- <script src="https://unpkg.com/dayjs@1.11.10/dayjs.min.js"></script> -->
+    <!-- now we will load it as module and import -->
+
+    <!-- To use external libraries and module together we will use ESM version of library   EcmaScript Module -- A version that works with Javascript Modules - jsut there is export included in esm version -->
+
+    <script type="module" src="script/checkout.js"></script>
+</body>
+
+</html>
