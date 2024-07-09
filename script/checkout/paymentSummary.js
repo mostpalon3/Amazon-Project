@@ -76,6 +76,7 @@ let deliveryFee = 0;
       //we request backend to create orders
       //we need to send cart to backend
       //a backend is created to process the order by supersimpledev
+      if (cart.length !== 0){
       try{
       const response = await  fetch('https://supersimplebackend.dev/orders',{//now we will wait for response after sending the post request
         //since await returns we will save it in var
@@ -108,7 +109,9 @@ let deliveryFee = 0;
     }else{
     localStorage.removeItem('cart');
     }
-
+    }else{
+      alert('Your cart is empty!')
+    }
     });
 }
 
