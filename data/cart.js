@@ -11,10 +11,9 @@ export function renderCart(para) {
     } else {
         loadFromStorage('cart');
     }
-
-    function loadFromStorage(cartKey) {
-        cart = JSON.parse(localStorage.getItem(cartKey)) || [];
-    }
+}
+export function loadFromStorage(cartKey) {
+    cart = JSON.parse(localStorage.getItem(cartKey)) || [];
 }
 export function buyNow(productId) {
     let selectorValue = document.querySelector(`.js-quantity-selector-${productId}`);
