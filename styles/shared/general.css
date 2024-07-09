@@ -99,3 +99,7 @@ select:focus,
 input:focus {
   outline: 2px solid rgb(255, 153, 0);
 }
+.external-link{
+  text-decoration: none;
+  color: rgb(35, 131, 131);
+}
