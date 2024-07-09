@@ -1,6 +1,7 @@
 import { getProduct, loadProductsFetch } from "../data/products.js";
 import { orders } from "../data/orders.js";
 import { calculateCartQuantity } from "../data/cart.js";
+import { searchButtonAction } from "./searchEngine.js";
 
 async function loadPage() {
   await loadProductsFetch();
@@ -8,6 +9,7 @@ async function loadPage() {
   calculateCartQuantity('.js-track-cart');
 }
 loadPage();
+searchButtonAction();
 
 console.log(orders);
 function renderTrackingPage() {
