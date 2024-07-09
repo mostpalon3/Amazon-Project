@@ -104,7 +104,7 @@ let deliveryFee = 0;
     window.location.href = 'orders.html';//it will replace the url after / , it is file path
     //the current file is checkout.html and it will look for the file orders.html
     if (para){
-      localStorage.removeItem('cart1');
+      localStorage.removeItem('cartTemp');
     }else{
     localStorage.removeItem('cart');
     }
