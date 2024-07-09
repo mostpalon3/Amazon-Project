@@ -1,12 +1,13 @@
 import { renderCheckouHeader } from "../script/checkout/checkoutHeader.js";
 export let cart;
+export let cartTemp = [];
 const url = new URL(window.location.href);
 export let para = url.searchParams.get('para');
 //the page will render according to url
 renderCart(para);
 export function renderCart(para) {
     if (para) {
-        loadFromStorage('cart1');
+        loadFromStorage('cartTemp');
     } else {
         loadFromStorage('cart');
     }
@@ -16,20 +17,23 @@ export function renderCart(para) {
     }
 }
 export function buyNow(productId) {
-    let cart = [];
     let selectorValue = document.querySelector(`.js-quantity-selector-${productId}`);
     let quantity = Number(selectorValue.value);
-    cart.push({
+    cartTemp.push({
         productId,
         quantity,
         deliveryOptionId: '1'//default
     });
-    //saved in cart1 localstorage
-    localStorage.setItem('cart1', JSON.stringify(cart))
+    //saved in cartTemp localstorage
+    saveToStorage(true);
 }
 
-export function saveToStorage() {
-    localStorage.setItem('cart', JSON.stringify(cart))
+export function saveToStorage(para) {
+    if (para) {
+        localStorage.setItem(`cartTemp`, JSON.stringify(cartTemp));
+    } else {
+        localStorage.setItem(`cart`, JSON.stringify(cart));
+    }
 }
 
 export function addToCart(productId) {
@@ -57,13 +61,13 @@ export function addToCart(productId) {
             deliveryOptionId: '1'//default
         });
     }
-    saveToStorage();
+    saveToStorage(false);
 }
 //steps to remove from cart 
 //1.create a new array 
 // loop through the cart 
 //3. Add each product to the new array , except for this productId
-export function removeFromCart(productId) {
+export function removeFromCart(productId,para) {
     const newCart = [];
 
     cart.forEach((cartItem) => {
@@ -73,7 +77,7 @@ export function removeFromCart(productId) {
     });
     cart = newCart;//assing the cart to new cart, or u can say that it is one of the way to update the new value of the cart  
 
-    saveToStorage();
+    saveToStorage(para);
 }
 //steps to remove the product from the page 
 //1. Use the DOM to get the element to remove (so we will give the unique class by adding the id to the class od the container of that product )
@@ -88,7 +92,7 @@ export function calculateCartQuantity(classSelector) {
         .innerText = `${cartQuantity}`;
 }
 
-export function updateQuantity(productId, newQuantity) {
+export function updateQuantity(productId, newQuantity,para) {
     cart.forEach((cartItem) => {
         if (cartItem.productId === productId) {
             cartItem.quantity = newQuantity;
@@ -104,7 +108,7 @@ export function updateQuantity(productId, newQuantity) {
             }
             //   calculateCartQuantity('.js-checkout')
             renderCheckouHeader();
-            saveToStorage();
+            saveToStorage(para);
         }
     })
 }
@@ -127,7 +131,7 @@ export function updateDeliveryOption(productId, deliveryoptionid) {
         }
     })
     matchingItem.deliveryOptionId = deliveryoptionid;
-    saveToStorage();
+    saveToStorage(false);
 }
 
 export function loadCart(fun) {
