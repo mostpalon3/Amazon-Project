@@ -4,12 +4,21 @@ import { loadProductsFetch, products } from "../data/products.js";
 export let searchedProduct;
 export function searchButtonAction() {
     const searchButtonDOM = document.querySelector('.js-search-button');
-    searchButtonDOM
-        .addEventListener('click', () => {
-            let searchBarValue = document.querySelector('.js-search-bar').value;
-            window.location.href = `index.html?search=${searchBarValue}`
-        });
+    const searchBarDOM = document.querySelector('.js-search-bar');
+
+    const searchHandler = () => {
+        let searchBarValue = searchBarDOM.value;
+        window.location.href = `index.html?search=${searchBarValue}`;
+    };
+
+    searchButtonDOM.addEventListener('click', searchHandler);
+    searchBarDOM.addEventListener('keypress', (event) => {
+        if (event.key === 'Enter') {
+            searchHandler();
+        }
+    });
 }
+
 
 export async function searchingProduct() {
     const url = new URL(window.location.href)
