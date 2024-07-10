@@ -1,9 +1,10 @@
-import {addToCart, buyNow, calculateCartQuantity,  renderCart } from "../data/cart.js";
+import { addToCart, buyNow, calculateCartQuantity, renderCart } from "../data/cart.js";
 //another syntax for this
 //import * cartModule from '../data/cart.js';
 //cartModule.cart
 // cartModule.addToCart('id');
 import { products, loadProducts } from "../data/products.js";
+import { searchButtonAction, searchedProduct, searchingProduct } from "./searchEngine.js";
 //but this work only on live server, not when you are directly running from the file
 //but still we cant use this variable again , but now we know which variable is conflicting
 //but to overcome that we have a feature where we import the variable and change its name
@@ -18,11 +19,18 @@ loadProducts(renderProductsGrid);
 calculateCartQuantity(".js-cart-quantity"); //loading the cart at loading of the page
 
 
-function renderProductsGrid(){
-let productsHTML = "";
+async function renderProductsGrid() {
+  let productsHTML = "";
+  let filteredProduct = products;
+  let productSearched = await searchingProduct()
+  console.log(productSearched);
+  if (productSearched){
+    filteredProduct = productSearched;
+  }
 
-products.forEach((product) => {
-  productsHTML += `<!-- yha par + isiliye taaki saara html acumulate ho har baari naa kee har array  value par update ho bas -->
+
+  filteredProduct.forEach((product) => {
+    productsHTML += `<!-- yha par + isiliye taaki saara html acumulate ho har baari naa kee har array  value par update ho bas -->
             <div class="product-container">
           <div class="product-image-container">
             <img class="product-image"
@@ -84,38 +92,36 @@ products.forEach((product) => {
           </button>
         </div>
     `;
-});
-let select = document.querySelector(".js-product-grid");
-select.innerHTML = productsHTML;
-
-let clearId;
-function addedPreview(productId) {
-  clearTimeout(clearId);
-  const selector = document.querySelector(`.js-added-cart-${productId}`);
-  selector.classList.add("added-opacity");
-  clearId = setTimeout(() => {
-    selector.classList.remove("added-opacity");
-  }, 1000);
-}
-
-document.querySelectorAll(".js-add-to-cart").forEach((button) => {
-  button.addEventListener("click", () => {
-    const { productId } = button.dataset;
-    addToCart(productId);
-    calculateCartQuantity(".js-cart-quantity"); //defined in cart.js (its best practice to define the things in their own file)
-    addedPreview(productId);
   });
-});
-document.querySelectorAll('.js-buy-now')
-.forEach((link) => {
-  link.addEventListener('click',() => {
-    const productId = link.dataset.productId;
-    buyNow(productId);
-    window.location.href = 'checkout.html?para=true';
+  let select = document.querySelector(".js-product-grid");
+  select.innerHTML = productsHTML;
+
+  let clearId;
+  function addedPreview(productId) {
+    clearTimeout(clearId);
+    const selector = document.querySelector(`.js-added-cart-${productId}`);
+    selector.classList.add("added-opacity");
+    clearId = setTimeout(() => {
+      selector.classList.remove("added-opacity");
+    }, 1000);
   }
-)
-})
 
-
+  document.querySelectorAll(".js-add-to-cart").forEach((button) => {
+    button.addEventListener("click", () => {
+      const { productId } = button.dataset;
+      addToCart(productId);
+      calculateCartQuantity(".js-cart-quantity"); //defined in cart.js (its best practice to define the things in their own file)
+      addedPreview(productId);
+    });
+  });
+  document.querySelectorAll('.js-buy-now')
+    .forEach((link) => {
+      link.addEventListener('click', () => {
+        const productId = link.dataset.productId;
+        buyNow(productId);
+        window.location.href = 'checkout.html?para=true';
+      }
+      );
+    });
 }
-
+searchButtonAction();

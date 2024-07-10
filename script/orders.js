@@ -2,6 +2,7 @@ import { orders } from "../data/orders.js"
 import formatCurrency from "../script/Utils/money.js"
 import { getProduct, products, loadProductsFetch } from "../data/products.js";
 import { addToCart, calculateCartQuantity } from "../data/cart.js";
+import { searchButtonAction } from "./searchEngine.js";
 
 async function loadPage() {
   await loadProductsFetch();
@@ -120,3 +121,4 @@ function butAgain() {
       })
     })
 }
+searchButtonAction();
