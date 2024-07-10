@@ -3,8 +3,7 @@ import {addToCart, buyNow, calculateCartQuantity,  renderCart } from "../data/ca
 //import * cartModule from '../data/cart.js';
 //cartModule.cart
 // cartModule.addToCart('id');
-import { products, loadProducts, loadProductsFetch } from "../data/products.js";
-import { searchButtonAction, searchedProduct, searchingProduct } from "./searchEngine.js";
+import { products, loadProducts } from "../data/products.js";
 //but this work only on live server, not when you are directly running from the file
 //but still we cant use this variable again , but now we know which variable is conflicting
 //but to overcome that we have a feature where we import the variable and change its name
@@ -12,16 +11,14 @@ import { searchButtonAction, searchedProduct, searchingProduct } from "./searchE
 //this will take the input and rename it so that it does not conflict with the cart variable below
 // const cart = [];
 
-await loadProductsFetch();
-renderProductsGrid();
-// loadProducts(renderProductsGrid);
+loadProducts(renderProductsGrid);
 //Http requests are asynchronous, it will take time for the message to go and travel back to give the response,the products havent loaded yet and with that we are loading this amazon home page(or say the productsHTML ran before the products came so we need to run the productsHTML after the products load from the backend),so we need to wait for http request to finish first and response to combeack then we load this page
 //so we can load this page in function after load of response in product.js
 
 calculateCartQuantity(".js-cart-quantity"); //loading the cart at loading of the page
 
 
-export function renderProductsGrid(){
+function renderProductsGrid(){
 let productsHTML = "";
 
 products.forEach((product) => {
@@ -118,9 +115,7 @@ document.querySelectorAll('.js-buy-now')
   }
 )
 })
+
+
 }
 
-
-searchButtonAction();
-
-searchingProduct();
