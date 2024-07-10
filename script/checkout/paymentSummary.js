@@ -62,7 +62,7 @@ let deliveryFee = 0;
             <div>Order total:</div>
             <div class="payment-summary-money">$${formatCurrency(totalCents)}</div>
           </div>
-
+          <input type = "checkbox"><span>Cash on delivery<span>
           <button class="place-order-button button-primary js-place-order">
             Place your order
           </button>
