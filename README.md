@@ -1,0 +1,3 @@
+# [Amazon Clone Project](https://mostpalon3.github.io/Amazon-Project/)
+
+This project is a comprehensive Amazon clone built using JavaScript, CSS, and HTML. It replicates the core functionalities and design elements of the original Amazon website, providing a seamless and interactive user experience. The clone includes features such as product listings, detailed product pages, a shopping cart,checkout process, and a tracking page. Designed to mimic the appearance and usability of Amazon, this project serves as a demonstration of web development skills, particularly in creating responsive and user-friendly interfaces. It showcases the potential of front-end technologies to build complex and dynamic web applications.
