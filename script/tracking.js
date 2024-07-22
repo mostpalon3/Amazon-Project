@@ -134,7 +134,7 @@ function renderTrackingPage() {
     else if (progressPercentage < 100){
       document.querySelector('.js-shipped').classList.add('current-status')
     }
-    else if (progressPercentage === 100){
+    else if (progressPercentage >= 100){
       document.querySelector('.js-delivered').classList.add('current-status')
     }
 }
